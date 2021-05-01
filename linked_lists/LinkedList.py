@@ -20,6 +20,15 @@ class linked_list():
         self.head.nex    = new_node
         self.head        = new_node
         print(f'{val} inserted successfully')
+    def insert_tail(self, value):
+        if self.head==None:
+            self.insert(value)
+            print('inserted at the tail')
+            return
+        new_node = node(value)
+        new_node.nex = self.tail
+        self.tail = new_node
+        print('inserted at the tail or beginning')
     
     def delete(self):
         if self.head == None:
