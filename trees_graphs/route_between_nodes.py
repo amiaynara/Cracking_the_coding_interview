@@ -22,7 +22,7 @@ def bfs(node):
     return False
 
 m, n, edges = take_input()
-n1, n2 = 0, 7
+n1, n2 = 7, 9
 graph = create_adj_list(edges, directed=True)
 # solution 1
 print(bfs(n1))
