@@ -75,3 +75,38 @@ graph = create_adj_list(edges)
 print(graph)
 # given that 0 is the root node
 bfs(0)
+
+# second solution 
+# mark the level for each of the nodes being travelled. 
+def dfs(node, l):
+    if l == len(lls):
+        l.append(LinkedList())
+    visited.append(node)
+    lls[l].add(curr)
+    # for binary tree the below loop gets converted into just two lines
+    # dfs(curr.left, l+1)
+    # dfs(curr.right, l+1)
+    for neighbour in graph[node]:
+        if neighbour is not in visited:
+            dfs(neighbour, l  + 1)
+lls = []
+dfs(0, 1)
+
+# solution 3
+# instead of adding children to a queue just visit them at once
+# idea is when you are at a level get the children of that level in the list
+# next time in the loop just use these children as the parents ..... continue
+# a nice approach
+l = [] 
+curr = [0]
+while len(curr) > 0:
+    l.append(curr)
+    parent = curr
+    curr = []
+    for p in parent:
+        if p.left:
+            curr.append(p.left) 
+        if p.right: 
+            curr.append(p.right)
+
+

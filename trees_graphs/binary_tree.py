@@ -4,6 +4,7 @@ from node import Node
 class CompleteBinaryTree():
     def __init__(self):
         self.root = None
+        self.H = {}
 
          
     def create_binary_tree(self, lst):
@@ -79,13 +80,37 @@ class CompleteBinaryTree():
         if curr.right != None:
             self.post_order_recur(curr.right)
         print(curr.value, end = " " )
+    
+    def dfs(self):
+        self._dfs(self.root)
+        copy = self.H
+        self.H = {}
+        return copy
+
+    def _dfs(self, curr, l=0):
+        if curr.left != None: 
+            self._dfs(curr.left, l + 1)
+        if curr.right != None: 
+            self._dfs(curr.right, l + 1)
+        if curr.right == None and curr.left == None:
+            if l not in self.H:
+                self.H[l] = 0
+            self.H[l] += 1            
 
 if __name__=="__main__":
     cbt = CompleteBinaryTree()
     level_order_traversal = [2, 3 ,6, 10 , 1 , 4, 5]
     cbt.create_binary_tree(level_order_traversal)
-    print(level_order_traversal)
-    cbt.level_order_traversal()
-    cbt.in_order()
-    cbt.post_order()
-    cbt.pre_order()
+    H = cbt.dfs()
+    print(H)    
+    if len(H.keys()) == 1:
+        print("balanced")
+    elif len(H.keys()) > 2:
+        print("not balanced")
+    else:
+        h1, h2 = H.keys()
+        if abs(h1 - h2) == 1:
+            print("balanced")
+        else:
+            print("not balanced")
+
